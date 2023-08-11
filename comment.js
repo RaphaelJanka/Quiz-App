@@ -71,7 +71,7 @@ let success = new Audio('audio/success.mp3');
 let fail = new Audio('audio/fail.mp3');
 
 function init() {
-    document.getElementById('all-questions').innerHTML = quiz.length; 
+    document.getElementById('all-questions').innerHTML = quiz.length; // Gesamtanzahl der Fragen festlegen
     showQuestion();
 }
 
@@ -93,12 +93,15 @@ function showQuestion() {
     } 
 }
 function gameIsOver() {
-    return currentQuestion >= quiz.length  
+    return currentQuestion >= quiz.length  // Wenn die Reihenfolge der aktuellen Fragen höher oder gleich der Gesamtanzahl der Fragen ist 
+
+    // return validiert den Wert uns sorgt dafür, dass die Funktion true ist.
+
 }
 
 
 function showEndscreen() {
-        document.getElementById('endscreen').style = ''; 
+        document.getElementById('endscreen').style = ''; //
         document.getElementById('question-body').style = 'display: none;'
         document.getElementById('total-right-answers').innerHTML = quiz.length;
         document.getElementById('total-right-questions').innerHTML = rightQuestions; 
@@ -107,7 +110,7 @@ function showEndscreen() {
 
 function updateProgressBar() {
         let percent = (currentQuestion +1) / quiz.length;
-        percent = Math.round(percent *100);                         
+        percent = Math.round(percent *100);                           //Update Prozentbalken
         document.getElementById('progress').innerHTML = `${percent}%`; 
         document.getElementById('progress').style.width = `${percent}%`;  
 }
@@ -117,7 +120,7 @@ function showNextQuestion() {
 
         document.getElementById('current-number').innerHTML = currentQuestion +1;
         document.getElementById('questiontext').innerHTML = question['question'];
-        document.getElementById('answer_1').innerHTML = question['answer_1'];   
+        document.getElementById('answer_1').innerHTML = question['answer_1'];   // Zeigt nächste Frage an
         document.getElementById('answer_2').innerHTML = question['answer_2'];
         document.getElementById('answer_3').innerHTML = question['answer_3'];
         document.getElementById('answer_4').innerHTML = question['answer_4'];
@@ -147,7 +150,7 @@ function rightAnswerSelected(selection, question) {
 }
 
 function nextQuestion() {
-    currentQuestion++; 
+    currentQuestion++; //z.B. von 0 auf 1 wird array "quiz" erhöht.
     document.getElementById('next-btn').disabled = true;
     resetAnswers();
     showQuestion();
@@ -164,9 +167,9 @@ function resetAnswers() {
     document.getElementById('answer_4').parentNode.classList.remove('right-answer');
 }
 function replay() {
-    rightQuestions = 0;  
-    currentQuestion = 0; 
-    document.getElementById('endscreen').style = 'display: none'; 
-    document.getElementById('question-body').style = ''; 
+    rightQuestions = 0;  // Anzahl richtiger Antworten zurücksetzen
+    currentQuestion = 0; // Anzahl aktueller Fragen zurücksetzen
+    document.getElementById('endscreen').style = 'display: none'; //endscreen ausblenden
+    document.getElementById('question-body').style = ''; // Fragen wieder einblenden
     init();
 }

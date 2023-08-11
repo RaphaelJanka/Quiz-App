@@ -1,13 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quizapp</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/quiz-logo-small.png">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body onload="init()">
+
+    <header class="p-3 bg-dark">
+      <div class="header-content">
+        <div class="header-left-container">
+          <a href=""><img src="img/quiz-logo.png" alt="" class="h-img "></a>
+          <div class="nav-link-box">
+            <a href="" class="menu-links">Home</a>
+            <a href="#" class="menu-links">Categories</a>
+            <a href="#" class="menu-links">Contact</a>
+          </div>
+        </div>
+        <div class="profile-box">
+          <img src="img/profile.png" alt="" class="profile">
+        </div>
+      </div>
+    </header> 
+
+    <main>  
+
+      <!-- Sidebar -->
+
+      <section class="card-container bg-dark">
+        <div class="side bg-dark">
+          <div class="sidabar-content">
+            <div class="sidebar-img-box border-quizbox">
+              <img src="img/quiz-logo.png" alt="" class="img-sidebar">
+            </div>
+            <a href="" id="atw" class="sidebar-box-middle">Around the World</a>
+            <div class="text-center sidebar-box">
+              <span>Science</span>
+            </div>
+            <div class="text-center sidebar-box">
+              <span>Movies</span>
+            </div>
+            <div class="text-center sidebar-box">
+              <span>Music</span>
+            </div>
+            <div class="text-center sidebar-box border-bottom-blue">
+              <span>History</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+
+        <!-- Start screen-->
+
+        <section id="startscreen" class="quiz-intro bg-dark">
+          <div class="quiz-container">
+            <img src="img/quiz-logo.png" alt="Quiz" class="quiz-logo ">
+          </div> 
+          <div class="quiz-topic ">
+            <span class=" fs-1 mb-1 start-headline">Around the World</span>
+            <span class="text-light fs-5 mb-4 text-center">Wie groß ist dein Wissen über die Welt?</span>
+            <div class="globe-container mt-2">
+              <img src="img/globe-312563_640.png" alt="" class="globe">
+            </div>
+          </div>
+          <button class="share-btn mt-5 mb-4" type="button" onclick="startQuiz()">START</button>
+        </section> 
+
+        <!-- Start Screen -->
+
+
+        <div id="playscreen" class="card card-style  bg-dark" style="display: none;">
+          <div class="game-heading-box ">
+            <div class="border-quizbox game-header">
+              <span class="game-heading">Around the World</span>
+              <img src="img/globe-312563_640.png" alt="" class="img-game">
+            </div>
+          </div>
+          <div class="progress mb-4 bg-ld" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+            <div id="progress" class="progress-bar progress" style="width: 0%"></div>
+          </div>
+          
+          <!-- endscreen -->
+
+          <div class="card-body bg-dark text-light endscreen-width" id="endscreen" style="display: none;">
+            <div class="endscreen-content">
+              <img src="img/Group 5.png" alt="" class="endscreen-img">
+                <span class="fs-3 text-center">COMPLETE QUIZ</span>
+                <div>
+                  <span class="fs-5 text-center">YOUR SCORE:</span>
+                  <span class="fs-5 text-center"><b id="total-right-questions">x</b>/<b id="total-right-answers"></b></span>
+                </div>
+                <button class="share-btn">SHARE</button>
+                <button id="replay" type="button" class="replay-btn" onclick="replay()">Replay</button>
+            </div>  
+          </div>
+
+          <!-- endscreen -->
+
+          <div class="card-body bg-dark" id="question-body">
+            <h3 class="card-subtitle mb-4 text-light " id="questiontext">Frage</h3>
+            <div class="card text-light answer-bg mb-4 quiz-answer-card border-yellow " onclick="answer('answer_1')">
+                <div class="card-body" id="answer_1"></div>
+            </div>
+
+            <div class="card text-light answer-bg mb-4 quiz-answer-card border-yellow " onclick="answer('answer_2')">
+              <div class="card-body" id="answer_2"></div>
+            </div>
+
+            <div class="card text-light answer-bg mb-4 quiz-answer-card border-yellow " onclick="answer('answer_3')">
+              <div class="card-body" id="answer_3"></div>
+            </div>
+
+            <div class="card text-light answer-bg mb-4 quiz-answer-card border-yellow " onclick="answer('answer_4')">
+              <div class="card-body" id="answer_4"></div>  
+            </div>
+
+            <div class="quiz-footer">
+              <span class="text-light"> <b id="current-number" class="c-b">1</b> von <b id="all-questions" class="c-p">8</b> Fragen</span>
+              <button id="next-btn" type="button" class="quiz-btn" disabled onclick="nextQuestion()">Next</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </body>
 </html>
